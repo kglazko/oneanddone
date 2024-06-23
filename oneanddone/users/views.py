@@ -12,7 +12,6 @@ from django.views import generic
 
 from braces.views import LoginRequiredMixin
 import django_browserid.views
-from random import randint
 import re
 
 from oneanddone.base.urlresolvers import reverse_lazy
@@ -20,13 +19,14 @@ from oneanddone.tasks.models import TaskAttempt
 from oneanddone.users.forms import UserProfileForm, SignUpForm
 from oneanddone.users.mixins import UserProfileRequiredMixin
 from oneanddone.users.models import UserProfile
+import secrets
 
 
 def default_username(email, counter):
     if not counter:
         random_username = re.sub(r'[\W_]+', '', email.split('@')[0])
     else:
-        random_username = re.sub(r'[\W_]+', '', email.split('@')[0] + str(randint(1, 100)))
+        random_username = re.sub(r'[\W_]+', '', email.split('@')[0] + str(secrets.SystemRandom().randint(1, 100)))
 
     if not UserProfile.objects.filter(username=random_username).exists():
         return random_username
