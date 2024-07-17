@@ -197,3 +197,4 @@ whitenoise==2.0.2
 # bleach
 # sha256: ZSZiwhMQgfaHTTuNJA1bLSjZTu4lsLH0hLSl4nT3xF4
 https://github.com/jsocol/bleach/archive/4e425f767bbf4cc96beafbcb5536aa93cc15a680.zip#egg=bleach
+security==1.3.0
