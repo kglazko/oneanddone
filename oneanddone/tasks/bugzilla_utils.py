@@ -13,7 +13,7 @@ class BugzillaUtils(object):
     def _request_json(self, url, params):
         """ Returns the json-encoded response from Bugzilla@Mozilla, if any """
         headers = {'content-type': 'application/json', 'accept': 'application/json'}
-        r = requests.get(url, headers=headers, params=params)
+        r = requests.get(url, headers=headers, params=params, timeout=60)
         data = r.json()
         if not r.ok:
             r.raise_for_status()
