@@ -1,7 +1,6 @@
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
-import random
 import json
 
 from rest_framework import status
@@ -13,6 +12,7 @@ from nose.tools import eq_, assert_true, assert_greater
 from oneanddone.users.tests import UserFactory
 from oneanddone.tasks.tests import (TaskFactory, TaskProjectFactory, TaskTeamFactory,
                                     TaskTypeFactory, TaskAttemptFactory)
+import secrets
 
 
 class APITests(APITestCase):
@@ -45,7 +45,7 @@ class APITests(APITestCase):
         Test task list, task details, task deletion for user with false token
         """
         invalid_key = 'd81e33c57b2d9471f4d6849bab3cb233b3b30468'
-        false_token = ''.join(random.sample(invalid_key, len(invalid_key)))
+        false_token = ''.join(secrets.SystemRandom().sample(invalid_key, len(invalid_key)))
 
         self.client.credentials(HTTP_AUTHORIZATION='Token ' + false_token)
 
