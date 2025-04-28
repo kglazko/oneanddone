@@ -2,7 +2,7 @@
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-import requests
+from security import safe_requests
 
 
 class BugzillaUtils(object):
@@ -13,7 +13,7 @@ class BugzillaUtils(object):
     def _request_json(self, url, params):
         """ Returns the json-encoded response from Bugzilla@Mozilla, if any """
         headers = {'content-type': 'application/json', 'accept': 'application/json'}
-        r = requests.get(url, headers=headers, params=params)
+        r = safe_requests.get(url, headers=headers, params=params)
         data = r.json()
         if not r.ok:
             r.raise_for_status()
