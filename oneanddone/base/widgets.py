@@ -10,6 +10,7 @@ from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext as _
 
 import requests
+from security import safe_requests
 
 
 class CalendarInput(DateInput):
@@ -88,7 +89,7 @@ class MyURLField(URLField):
         if url.scheme == '':
             value = 'http://' + value
         try:
-            r = requests.get(value, timeout=10, verify=False)
+            r = safe_requests.get(value, timeout=10, verify=False)
             if not r.ok:
                 raise ValidationError(_('The website is not reachable. Please enter a valid url.'))
         except requests.exceptions.RequestException:
